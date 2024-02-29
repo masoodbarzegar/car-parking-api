@@ -16,8 +16,10 @@ use \App\Http\Controllers\Api\V1\Auth;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('profile', [Auth\ProfileController::class, 'show']);
+    Route::put('profile', [Auth\ProfileController::class, 'update']);
 });
 
 
