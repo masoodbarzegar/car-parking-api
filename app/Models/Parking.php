@@ -27,6 +27,15 @@ class Parking extends Model
         return $this->belongsTo(Vehicle::class);
     }
 
+    public function scopeActive($query)
+    {
+        return $query->whereNull('stop_time');
+    }
+    public function scopeStopped($query)
+    {
+        return $query->whereNotNull('stop_time');
+    }
+
     protected static function booted()
     {
         static::addGlobalScope('user', function (Builder $builder) {
